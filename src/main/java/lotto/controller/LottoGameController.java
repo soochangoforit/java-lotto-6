@@ -27,15 +27,23 @@ public class LottoGameController {
 
     public void run() {
         PurchaseAmount purchaseAmount = fetch(this::readPurchaseAmount);
-        LottoCount lottoCount = purchaseAmount.calculateLottoCount();
-        LottoGroup lottoGroup = LottoGroup.create(lottoCount, numberGenerator);
+        LottoGroup lottoGroup = createLottoGroup(purchaseAmount);
         outputView.printLottoGroup(lottoGroup);
-        Lotto winningLotto = fetch(this::readWinningLotto);
-        WinningCombination winningCombination = fetch(() -> createWinningCombination(winningLotto));
+        WinningCombination winningCombination = createWinningCombination();
         LottoMachine lottoMachine = LottoMachine.of(lottoGroup, winningCombination);
         LottoMatchingResult lottoResult = lottoMachine.calculateWinningStatistics();
         outputView.printLottoResult(lottoResult);
         outputView.printProfitRate(lottoResult.calculateProfitRate(purchaseAmount));
+    }
+
+    private WinningCombination createWinningCombination() {
+        Lotto winningLotto = fetch(this::readWinningLotto);
+        return fetch(() -> createWinningCombination(winningLotto));
+    }
+
+    private LottoGroup createLottoGroup(PurchaseAmount purchaseAmount) {
+        LottoCount lottoCount = purchaseAmount.calculateLottoCount();
+        return LottoGroup.create(lottoCount, numberGenerator);
     }
 
     private WinningCombination createWinningCombination(Lotto winningLotto) {

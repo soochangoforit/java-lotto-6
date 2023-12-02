@@ -18,7 +18,7 @@ public enum LottoResult {
         this.winningMoney = winningMoney;
     }
 
-    // TODO : 리펙토링 필요
+    // TODO : 리펙토링 필요 (깔끔하게 할 수 있는 방법)
     public static LottoResult of(int countOfMatch, boolean isBonusNumberMatch) {
         LottoResult result = Stream.of(values())
                 .filter(lottoResult -> lottoResult.requiredMatchCount == countOfMatch)
@@ -28,7 +28,6 @@ public enum LottoResult {
         if (result == THIRD && isBonusNumberMatch) {
             return SECOND;
         }
-
         return result;
     }
 
