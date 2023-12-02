@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.List;
+
 public class WinningCombination {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
@@ -18,5 +20,13 @@ public class WinningCombination {
 
     public static WinningCombination of(Lotto winningLotto, LottoNumber bonusNumber) {
         return new WinningCombination(winningLotto, bonusNumber);
+    }
+
+    public boolean containsLottoNumber(LottoNumber number) {
+        return winningLotto.contains(number);
+    }
+
+    public boolean containsBonusNumber(List<LottoNumber> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }

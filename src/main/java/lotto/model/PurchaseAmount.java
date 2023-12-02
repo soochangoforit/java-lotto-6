@@ -15,6 +15,9 @@ public class PurchaseAmount {
         if (amount % 1_000 != 0) {
             throw new IllegalArgumentException("구매 금액은 1,000원 단위가 되어야 합니다.");
         }
+        if (amount > 100_000) {
+            throw new IllegalArgumentException("구매 금액은 100,000원을 초과할 수 없습니다.");
+        }
     }
 
     public static PurchaseAmount from(int amount) {
@@ -25,4 +28,7 @@ public class PurchaseAmount {
         return LottoCount.from(amount / 1_000);
     }
 
+    public int getAmount() {
+        return amount;
+    }
 }

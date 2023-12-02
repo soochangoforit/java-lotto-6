@@ -1,6 +1,8 @@
 package lotto.model;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class LottoGroup {
@@ -17,6 +19,16 @@ public class LottoGroup {
                 .toList();
 
         return new LottoGroup(lottos);
+    }
+
+    public LottoMatchingResult calculateWinningStatistics(WinningCombination winningCombination) {
+        Map<LottoResult, Integer> statistics = new EnumMap<>(LottoResult.class);
+        // TODO : winningCombination.match 가 적절할까? lotto.match 가 적절할까?
+        for (Lotto lotto : lottos) {
+            LottoResult result = lotto.match(winningCombination);
+            statistics.put(result, statistics.getOrDefault(result, 0) + 1);
+        }
+        return LottoMatchingResult.from(statistics);
     }
 
     public List<Lotto> getLottos() {

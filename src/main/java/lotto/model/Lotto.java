@@ -37,8 +37,18 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+    public LottoResult match(WinningCombination winningCombination) {
+        int countOfMatch = (int) numbers.stream()
+                .filter(winningCombination::containsLottoNumber)
+                .count();
+
+        boolean isBonusNumberMatch = winningCombination.containsBonusNumber(numbers);
+
+        return LottoResult.of(countOfMatch, isBonusNumberMatch);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> getNumbers() {
