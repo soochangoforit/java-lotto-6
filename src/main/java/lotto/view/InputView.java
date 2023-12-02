@@ -42,9 +42,23 @@ public class InputView {
         System.out.println();
     }
 
+    public int readBonusNumber() {
+        println("보너스 번호를 입력해 주세요.");
+        String rawBonusNumber = readLine();
+        printEmptyLine();
+        validateBonusNumber(rawBonusNumber);
+        return convertToInt(rawBonusNumber);
+    }
+
+    private void validateBonusNumber(String rawBonusNumber) {
+        BlankValidator.validate(rawBonusNumber);
+        DigitsOnlyValidator.validate(rawBonusNumber);
+    }
+
     public List<Integer> readWinningLotto() {
         println("당첨 번호를 입력해 주세요.");
         String rawWinningLotto = readLine();
+        printEmptyLine();
         validateWinningLotto(rawWinningLotto);
         return splitToInt(",", rawWinningLotto);
     }

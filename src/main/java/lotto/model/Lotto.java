@@ -37,6 +37,10 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
+    public boolean contains(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     public List<LottoNumber> getNumbers() {
         return numbers;
     }

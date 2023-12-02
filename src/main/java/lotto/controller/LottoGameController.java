@@ -5,8 +5,10 @@ import java.util.function.Supplier;
 import lotto.model.Lotto;
 import lotto.model.LottoCount;
 import lotto.model.LottoGroup;
+import lotto.model.LottoNumber;
 import lotto.model.NumberGenerator;
 import lotto.model.PurchaseAmount;
+import lotto.model.WinningCombination;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -27,7 +29,14 @@ public class LottoGameController {
         LottoGroup lottoGroup = LottoGroup.create(lottoCount, numberGenerator);
         outputView.printLottoGroup(lottoGroup);
         Lotto winningLotto = fetch(this::readWinningLotto);
+        WinningCombination winningCombination = fetch(() -> createWinningCombination(winningLotto));
 
+    }
+
+    private WinningCombination createWinningCombination(Lotto winningLotto) {
+        int rawBonusNumber = inputView.readBonusNumber();
+        LottoNumber bonusNumber = LottoNumber.from(rawBonusNumber);
+        return WinningCombination.of(winningLotto, bonusNumber);
     }
 
     private Lotto readWinningLotto() {
