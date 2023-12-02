@@ -1,6 +1,9 @@
 package lotto.controller;
 
 import java.util.function.Supplier;
+import lotto.model.LottoCount;
+import lotto.model.LottoGroup;
+import lotto.model.NumberGenerator;
 import lotto.model.PurchaseAmount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -8,14 +11,18 @@ import lotto.view.OutputView;
 public class LottoGameController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final NumberGenerator numberGenerator;
 
-    public LottoGameController(InputView inputView, OutputView outputView) {
+    public LottoGameController(InputView inputView, OutputView outputView, NumberGenerator numberGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.numberGenerator = numberGenerator;
     }
 
     public void run() {
         PurchaseAmount purchaseAmount = fetch(this::readPurchaseAmount);
+        LottoCount lottoCount = purchaseAmount.calculateLottoCount();
+        LottoGroup lottoGroup = LottoGroup.create(lottoCount, numberGenerator);
 
     }
 
