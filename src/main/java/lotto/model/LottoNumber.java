@@ -20,4 +20,8 @@ public class LottoNumber {
     public static LottoNumber from(int number) {
         return new LottoNumber(number);
     }
+
+    public int getNumber() {
+        return number;
+    }
 }

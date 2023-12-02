@@ -36,4 +36,8 @@ public class Lotto {
     public static Lotto from(List<Integer> numbers) {
         return new Lotto(numbers);
     }
+
+    public List<LottoNumber> getNumbers() {
+        return numbers;
+    }
 }

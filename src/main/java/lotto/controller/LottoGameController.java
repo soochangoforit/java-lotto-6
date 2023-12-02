@@ -23,6 +23,7 @@ public class LottoGameController {
         PurchaseAmount purchaseAmount = fetch(this::readPurchaseAmount);
         LottoCount lottoCount = purchaseAmount.calculateLottoCount();
         LottoGroup lottoGroup = LottoGroup.create(lottoCount, numberGenerator);
+        outputView.printLottoGroup(lottoGroup);
 
     }
 

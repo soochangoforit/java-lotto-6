@@ -18,4 +18,8 @@ public class LottoGroup {
 
         return new LottoGroup(lottos);
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }
