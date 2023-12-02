@@ -38,7 +38,6 @@ public class Lotto {
     }
 
     public LottoResult match(WinningCombination winningCombination) {
-        // TODO : 리펙토링할 부분이 있는지?
         int countOfMatch = (int) numbers.stream()
                 .filter(winningCombination::containsLottoNumber)
                 .count();

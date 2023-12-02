@@ -23,10 +23,8 @@ public class LottoGroup {
 
     public LottoMatchingResult calculateWinningStatistics(WinningCombination winningCombination) {
         Map<LottoResult, Integer> statistics = new EnumMap<>(LottoResult.class);
-        // TODO : winningCombination.match 가 적절할까? lotto.match 가 적절할까?
         for (Lotto lotto : lottos) {
             LottoResult result = lotto.match(winningCombination);
-            // TODO : 이를 조금더 리펙토링?
             statistics.put(result, statistics.getOrDefault(result, 0) + 1);
         }
         return LottoMatchingResult.from(statistics);
