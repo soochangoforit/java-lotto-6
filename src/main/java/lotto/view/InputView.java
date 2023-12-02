@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 import camp.nextstep.edu.missionutils.Console;
 import lotto.view.validator.BlankValidator;
 import lotto.view.validator.DigitsOnlyValidator;
+import lotto.view.validator.WinningLottoValidator;
 
 public class InputView {
 
@@ -41,18 +42,30 @@ public class InputView {
         System.out.println();
     }
 
-    private void print(String message) {
-        System.out.print(message);
+    public List<Integer> readWinningLotto() {
+        println("당첨 번호를 입력해 주세요.");
+        String rawWinningLotto = readLine();
+        validateWinningLotto(rawWinningLotto);
+        return splitToInt(",", rawWinningLotto);
     }
 
-    private List<String> split(String format, String input) {
-        return List.of(input.split(format));
+    private void validateWinningLotto(String rawWinningLotto) {
+        BlankValidator.validate(rawWinningLotto);
+        WinningLottoValidator.validate(rawWinningLotto);
     }
 
     private List<Integer> splitToInt(String delimiter, String input) {
         return Stream.of(input.split(delimiter))
                 .map(Integer::parseInt)
                 .toList();
+    }
+
+    private void print(String message) {
+        System.out.print(message);
+    }
+
+    private List<String> split(String format, String input) {
+        return List.of(input.split(format));
     }
 
 }

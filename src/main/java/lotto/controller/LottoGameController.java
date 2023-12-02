@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import java.util.List;
 import java.util.function.Supplier;
+import lotto.model.Lotto;
 import lotto.model.LottoCount;
 import lotto.model.LottoGroup;
 import lotto.model.NumberGenerator;
@@ -24,7 +26,13 @@ public class LottoGameController {
         LottoCount lottoCount = purchaseAmount.calculateLottoCount();
         LottoGroup lottoGroup = LottoGroup.create(lottoCount, numberGenerator);
         outputView.printLottoGroup(lottoGroup);
+        Lotto winningLotto = fetch(this::readWinningLotto);
 
+    }
+
+    private Lotto readWinningLotto() {
+        List<Integer> winningLottoNumbers = inputView.readWinningLotto();
+        return Lotto.from(winningLottoNumbers);
     }
 
     private PurchaseAmount readPurchaseAmount() {
